@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nekos Design - Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #ffe3e8; 
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            position: relative;
+            z-index: 1; 
+        }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nekos-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .nekos-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: #ff5c7c;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-subtitle {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #bfa3a7;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 6px;
+            background-color: #fff4f6; 
+            padding: 6px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 143, 163, 0.08);
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            color: #ff8fa3;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #ffdde2;
+            color: #ff5c7c;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .content-section {
+            display: none; 
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-section.active-section {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #333333;
+            margin-bottom: 35px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 3px;
+            background-color: #ffdde2;
+            border-radius: 2px;
+            margin: 8px auto 0 auto;
+        }
+
+        /* --- HOME / ABOUT ME VIEW --- */
+        .subtitle {
+            font-size: 0.9rem;
+            color: #b59ba0;
+            margin-top: -25px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #554a4c;
+            max-width: 680px;
+            margin: 0 auto 35px auto;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 680px;
+            margin: 0 auto 40px auto;
+        }
+
+        .skill-item {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid #fff0f2;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .skill-icon {
+            font-size: 1.4rem;
+            background: #ffffff;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(255, 143, 163, 0.1);
+        }
+
+        .skill-info h4 {
+            font-size: 0.9rem;
+            color: #333333;
+            font-weight: 700;
+        }
+
+        .skill-info p {
+            font-size: 0.75rem;
+            color: #776c6e;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: #ff5c7c;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: 1px solid #fff0f2;
+            box-shadow: 0 4px 12px rgba(255, 143, 163, 0.1);
+        }
+
+        .btn-contact:hover {
+            background-color: #ff5c7c;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 92, 124, 0.2);
+        }
+
+        .mail-row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .btn-mail {
+            background-color: #ffdde2;
+            color: #ff5c7c;
+            border: 1px solid #ffcbd4;
+        }
+
+        .btn-mail:hover {
+            background-color: #ff5c7c;
+            color: #ffffff;
+            border-color: #ff5c7c;
+        }
+
+        /* --- PORTFOLIO GALLERY STYLES --- */
+        .portfolio-category {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .category-subtitle {
+            font-size: 1.1rem;
+            color: #555555;
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-left: 4px solid #ff8fa3;
+            padding-left: 10px;
+        }
+
+        .emotes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .emote-card {
+            background: none;
+            border: none;
+            padding: 0;
+            width: 85px; 
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, z-index 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .emote-card:hover {
+            transform: scale(1.25); 
+            z-index: 10;
+        }
+
+        .emote-wrapper {
+            background: none;
+            border: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px; 
+        }
+
+        .emote-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 5px rgba(255, 143, 163, 0.12));
+        }
+
+        /* --- SERVICES VIEW --- */
+        .services-list {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border: 1px solid #fff0f2;
+            padding: 22px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(255, 143, 163, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .service-card.clickable {
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .service-card.clickable:hover {
+            transform: translateY(-2px);
+            border-color: #ff8fa3;
+        }
+
+        .service-card h3 {
+            color: #ff5c7c;
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #666666;
+            line-height: 1.5;
+            padding-left: 28px;
+        }
+
+        /* --- PRICE DROPDOWN MENU --- */
+        .price-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, margin-top 0.3s ease;
+            padding-left: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .price-details.open {
+            max-height: 200px;
+            margin-top: 10px;
+        }
+
+        .price-item {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #4a4a4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- FAQ VIEW --- */
+        .faq-list {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ffdde2;
+        }
+
+        .faq-item h3 {
+            font-size: 1.05rem;
+            color: #ff5c7c;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #554a4c;
+            line-height: 1.6;
+        }
+
+        .faq-sublist {
+            list-style-type: none;
+            padding-left: 15px;
+            margin-top: 8px;
+        }
+
+        .faq-sublist li {
+            font-size: 0.9rem;
+            color: #665b5d;
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 4px;
+        }
+
+        .faq-sublist li::before {
+            content: "•";
+            color: #ff8fa3;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="top-bar">
+            <div class="nekos-logo">
+                <svg width="54" height="48" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35 50C25 65 15 85 22 88C30 91 42 72 46 60" stroke="#d63b5a" stroke-width="3" stroke-linecap="round" fill="#ff7593"/>
+                    <path d="M65 50C75 65 85 85 78 88C70 91 58 72 54 60" stroke="#d63b5a" stroke-width="3" stroke-linecap="round" fill="#ff7593"/>
+                    <path d="M48 42C30 20 5 28 8 46C11 62 35 52 48 45Z" fill="#ff8fa3" stroke="#ff3366" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M16 43C24 35 36 38 44 43" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M22 47C28 43 35 44 40 46" stroke="#e65575" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M52 42C70 20 95 28 92 46C89 62 65 52 52 45Z" fill="#ff8fa3" stroke="#ff3366" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M84 43C76 35 64 38 56 43" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M78 47C72 43 65 44 60 46" stroke="#e65575" stroke-width="2" stroke-linecap="round"/>
+                    <rect x="43" y="37" width="14" height="15" rx="5" fill="#ff5c7c" stroke="#ff3366" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M46 40C48 39 50 39 52 40" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+
+                <div class="logo-text-wrapper">
+                    <span class="logo-title">Nekos</span>
+                    <span class="logo-subtitle">Design</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-link active" onclick="cambiarSeccion('inicio', this)">About Me</button>
+                <button class="nav-link" onclick="cambiarSeccion('portafolio', this)">Portfolio</button>
+                <button class="nav-link" onclick="cambiarSeccion('servicios', this)">Services</button>
+                <button class="nav-link" onclick="cambiarSeccion('faq', this)">FAQ</button>
+            </nav>
+        </div>
+
+        <main class="main-content">
+
+            <section id="inicio" class="content-section active-section">
+                <h2 class="section-title">About Me</h2>
+                <p class="subtitle">Digital Illustration & Emote Creator</p>
+                
+                <p class="about-text">
+                    Hello, I am the artist behind <strong>Nekosdesing</strong>. I have spent over two years developing my skills in digital illustration and specializing in creating emotes, badges, and illustrations for Twitch and Discord. I am passionate about transforming ideas into expressive designs full of personality, working closely with each client to create pieces that represent their community and style in a unique way.
+                </p>
+
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon">🎨</div>
+                        <div class="skill-info">
+                            <h4>Expressive Design</h4>
+                            <p>Emotes packed with personality.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">👾</div>
+                        <div class="skill-info">
+                            <h4>Badges & Pixel Art</h4>
+                            <p>Optimized for Twitch and Discord.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">💬</div>
+                        <div class="skill-info">
+                            <h4>Close Collaboration</h4>
+                            <p>Tailored work for every single client.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-buttons">
+                    <a href="https://x.com/Nekosdesing" target="_blank" class="btn-contact">✨ Twitter / X</a>
+                    <a href="https://www.tiktok.com/@nekosdesing" target="_blank" class="btn-contact">🎵 TikTok</a>
+                    <a href="https://www.instagram.com/nekosstudio_" target="_blank" class="btn-contact">📸 Instagram</a>
+                    <a href="https://www.etsy.com/shop/nekosdesing" target="_blank" class="btn-contact">🛍️ Etsy Shop</a>
+                    
+                    <div class="mail-row">
+                        <a href="mailto:nekosdesing@gmail.com" class="btn-contact btn-mail">✉️ Business Inquiries</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="portafolio" class="content-section">
+                <h2 class="section-title">Portfolio</h2>
+                
+                <div class="portfolio-category">
+                    <h3 class="category-subtitle">Emotes</h3>
+                    <div class="emotes-grid">
+                        <div class="emote-card"><div class="emote-wrapper"><img src="anime.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="animee.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="chicle.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Emilia.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Espeon.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="gato.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="hatsune.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="hollow.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="jake.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="jett.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="knith.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="lilly.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="loqui.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Maomao.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="morado.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="seraphine.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="soraka.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="squirtle.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="supernena.png" alt="Emote" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="ZeroTwo.png" alt="Emote" class="emote-img"></div></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-category">
+                    <h3 class="category-subtitle">Badges & Channel Points</h3>
+                    <div class="emotes-grid">
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título.png" alt="Egg Badge" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título (1).png" alt="Egg Badge" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título (2).png" alt="Egg Badge" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título (3).png" alt="Egg Badge" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título (4).png" alt="Egg Badge" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Ilustración Sin Título (5).png" alt="Egg Badge" class="emote-img"></div></div>
+                        
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (1).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (2).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (3).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (4).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (5).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="huevo (6).png" alt="Egg Badge with Face" class="emote-img"></div></div>
+
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Bright Wand.png" alt="Wand Channel Point" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Elixir of Wings.png" alt="Potion Channel Point" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Fairy Explorer Compass.png" alt="Compass Channel Point" class="emote-img"></div></div>
+                        <div class="emote-card"><div class="emote-wrapper"><img src="Glossy Dust Bag.png" alt="Bag Channel Point" class="emote-img"></div></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="servicios" class="content-section">
+                <h2 class="section-title">Services</h2>
+                <div class="services-list">
+                    
+                    <div class="service-card">
+                        <h3><span>🩷</span> Twitch Emotes</h3>
+                        <p>Unique and custom designs made tailored for your community.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3><span>👑</span> Subscriber Badges</h3>
+                        <p>Visual custom rewards for your most loyal subscribers.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3><span>💎</span> Bit Badges</h3>
+                        <p>Custom milestones to celebrate your community's support.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3><span>🎮</span> Discord Emotes</h3>
+                        <p>Perfect additions for your server and community interactions.</p>
+                    </div>
+
+                    <div class="service-card clickable" onclick="togglePrecios()">
+                        <h3><span>✨</span> Custom Commissions</h3>
+                        <p>Created from scratch just for you. (Click to view pricing)</p>
+                        
+                        <div id="lista-precios" class="price-details">
+                            <div class="price-item">🩷 1 Emote — €8</div>
+                            <div class="price-item">🩷 2 Emotes — €15</div>
+                            <div class="price-item">🩷 5 Emotes — €35</div>
+                            <div class="price-item">🩷 8 Emotes — €50</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="faq" class="content-section">
+                <h2 class="section-title">FAQ</h2>
+                <div class="faq-list">
+                    
+                    <div class="faq-item">
+                        <h3>How long does a commission take?</h3>
+                        <p>The standard turnaround time is between 3 to 7 days. Most orders are fully completed within a single week, though this can vary slightly based on the total number of designs requested.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Can I request revisions?</h3>
+                        <p>Yes. I will send you an initial sketch beforehand so you can review the layout and request any necessary adjustments. Once the sketch is approved and the final coloring phase begins, only minor adjustments can be made.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>What will I receive upon completion?</h3>
+                        <p>You will receive the final high-quality assets in transparent PNG format, fully optimized and ready to upload to Twitch and Discord. Each emote is delivered in the three official required sizes:</p>
+                        <ul class="faq-sublist">
+                            <li>112 × 112 px</li>
+                            <li>56 × 56 px</li>
+                            <li>28 × 28 px</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Are these designs exclusive?</h3>
+                        <p>Yes, absolutely. Every commission is drawn entirely from scratch for each individual client, ensuring it perfectly matches your character, branding, or personal style.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Can you design assets based on my character or avatar?</h3>
+                        <p>Of course! Feel free to provide reference images, character sheets, or a detailed description so I can bring your exact persona to life.</p>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+        function cambiarSeccion(idSeccion, botonClicado) {
+            const secciones = document.querySelectorAll('.content-section');
+            secciones.forEach(sec => sec.classList.remove('active-section'));
+            
+            const botones = document.querySelectorAll('.nav-link');
+            botones.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(idSeccion).classList.add('active-section');
+            botonClicado.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        function togglePrecios() {
+            const lista = document.getElementById('lista-precios');
+            lista.classList.toggle('open');
+        }
+    </script>
+
+</body>
+</html>
